@@ -22,3 +22,10 @@ code {
 .page-wrapper {
   min-height: 100vh;
 }
+img {
+  max-width: 100%;
+}
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}

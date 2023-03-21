@@ -1,0 +1,13 @@
+.card {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  background: #1e91d6;
+  border-radius: 24px;
+  cursor: none;
+  border: 1px solid #f1f1f1;
+  width: 50%;
+}
+.card__inner {
+  padding: 20px;
+}
