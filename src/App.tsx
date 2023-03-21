@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useMouse from "@react-hook/mouse-position";
 import { motion } from "framer-motion";
-import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
