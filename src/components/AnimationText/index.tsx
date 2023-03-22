@@ -23,7 +23,7 @@ const tagMap = {
 // AnimatedCharacters
 // Handles the deconstruction of each word and character to setup for the
 // individual character animations
-const AnimationText = (props: any) => {
+const AnimationText: React.FC<{ text: string; type: string }> = (props) => {
   // Framer Motion variant object, for controlling animation
   const item = {
     hidden: {
@@ -42,7 +42,7 @@ const AnimationText = (props: any) => {
   const splitWords = props.text.split(" ");
 
   // Create storage array
-  const words: any[] = [];
+  const words: string[] = [];
 
   // Push each word into words array
   for (const [, item] of splitWords.entries()) {
@@ -58,7 +58,7 @@ const AnimationText = (props: any) => {
   const Tag = tagMap[props.type as keyof TagMapType];
 
   return (
-    <Tag>
+    <h1>
       {words.map((word, index) => {
         return (
           // Wrap each word in the Wrapper component
@@ -85,7 +85,7 @@ const AnimationText = (props: any) => {
         );
       })}
       {/* {} */}
-    </Tag>
+    </h1>
   );
 };
 
