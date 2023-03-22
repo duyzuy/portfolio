@@ -6,3 +6,10 @@ export enum StorageKEY {
   ipAddress = "glx_ipAddress",
   booking = "glx_booking",
 }
+
+export enum VariantsType {
+  hide = "hide",
+  default = "default",
+  project = "project",
+  contact = "contact",
+}
