@@ -21,3 +21,11 @@
   pointer-events: none;
   margin: auto;
 }
+
+.box {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: red;
+  position: fixed;
+}

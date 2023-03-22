@@ -1,22 +1,23 @@
-import React, { useState, useRef, useEffect, memo } from "react";
+import React, { useState, useRef, useEffect, memo, useCallback } from "react";
 import { Outlet } from "react-router-dom";
 import useMouse from "@react-hook/mouse-position";
-
+import { useFollowPointer } from "../../hooks/useFollowPointer";
 import CursorPointer from "./components/CursorPointer";
 import { useCursorContext } from "../../providers/hooks";
+import { motion } from "framer-motion";
 import "./style.scss";
 import { VariantsType } from "../../models";
 const RootElement = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const rootRef = useRef<HTMLDivElement>(null);
-  const { cursorText, cursorVariant, setCursorVariant, setCursorText } =
+
+  const { cursorText, cursorVariant, onSetCursorText, onSetCursorVariant } =
     useCursorContext();
   const mouse = useMouse(rootRef, {
     enterDelay: 100,
     leaveDelay: 300,
   });
-
   useEffect(() => {
     if (mouse.clientX === null || mouse.clientY === null) {
       return;
@@ -33,7 +34,8 @@ const RootElement = () => {
       height: 10,
       width: 10,
       fontSize: "16px",
-      backgroundColor: "#fff",
+      backgroundColor: "rgb(0 0 0 / 0%)",
+      border: "1px solid rgb(0 0 0 / 0%)",
       x: mousePosition.x - 5,
       y: mousePosition.y - 5,
       transition: {
@@ -46,8 +48,8 @@ const RootElement = () => {
       height: 10,
       width: 10,
       fontSize: "16px",
-      backgroundColor: "#1e91d6",
-      clipPath: "circle(50% at 50% 50%)",
+      backgroundColor: "rgb(0 0 0 / 100%)",
+      border: "1px solid rgb(0 0 0 / 0%)",
       x: mousePosition.x - 5,
       y: mousePosition.y - 5,
       transition: {
@@ -57,14 +59,14 @@ const RootElement = () => {
     },
     card: {
       opacity: 1,
-      backgroundColor: "#fff",
+      backgroundColor: "rgb(0 0 0 / 100%)",
+      border: "1px solid rgb(0 0 0 / 0%)",
       color: "#000",
       height: 80,
       width: 80,
       fontSize: "18px",
       x: mousePosition.x - 40,
       y: mousePosition.y - 40,
-      clipPath: "circle(50% at 50% 50%)",
       transition: {
         type: "spring",
         mass: 0.6,
@@ -72,7 +74,8 @@ const RootElement = () => {
     },
     text: {
       opacity: 1,
-      backgroundColor: "#FFBCBC",
+      backgroundColor: "rgb(0 0 0 / 0%)",
+      border: "1px solid rgb(0 0 0 / 0%)",
       color: "#000",
       height: 64,
       width: 64,
@@ -82,30 +85,32 @@ const RootElement = () => {
     },
     button: {
       opacity: 1,
-      backgroundColor: "#FFBCBC",
+      mixBlendMode: "darken",
+      backgroundColor: "rgb(0 0 0 / 0%)",
+      border: "1px solid rgb(0 0 0 / 100%)",
       color: "#000",
       height: 64,
       width: 64,
-      fontSize: "32px",
-      clipPath:
-        "polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%)",
       x: mousePosition.x - 32,
       y: mousePosition.y - 32,
     },
   };
 
+  const onMouseLeave = useCallback(() => {
+    onSetCursorVariant(VariantsType.hide);
+    onSetCursorText("");
+  }, []);
+
+  const onMouseEnter = useCallback(() => {
+    onSetCursorVariant(VariantsType.default);
+    onSetCursorText("");
+  }, []);
   return (
     <div
       className="root-app"
       ref={rootRef}
-      onMouseLeave={() => {
-        setCursorVariant(VariantsType.hide);
-        setCursorText("");
-      }}
-      onMouseEnter={() => {
-        setCursorVariant(VariantsType.default);
-        setCursorText("");
-      }}
+      onMouseLeave={onMouseLeave}
+      onMouseEnter={onMouseEnter}
     >
       <CursorPointer
         variants={variants}

@@ -42,11 +42,15 @@ const AnimationText: React.FC<{ text: string; type: string }> = (props) => {
   const splitWords = props.text.split(" ");
 
   // Create storage array
-  const words: string[] = [];
+  const words: string[][] = [];
 
   // Push each word into words array
-  for (const [, item] of splitWords.entries()) {
-    words.push(item.split(""));
+  // for (const [, item] of splitWords.entries()) {
+  //   words.push(item.split(""));
+  // }
+
+  for (let count = 0; count < splitWords.length; count++) {
+    words.push(splitWords[count].split(""));
   }
 
   // Add a space ("\u00A0") to the end of each word
@@ -90,100 +94,3 @@ const AnimationText: React.FC<{ text: string; type: string }> = (props) => {
 };
 
 export default AnimationText;
-
-// import React, { useState } from "react";
-// import { motion } from "framer-motion";
-// import AnimatedText from "./AnimatedText";
-// import "./styles.css";
-
-// export default function App() {
-//   const [replay, setReplay] = useState(true);
-//   // Placeholder text data, as if from API
-//   const placeholderText = [
-//     { type: "heading1", text: "Framer Motion" },
-//     {
-//       type: "heading2",
-//       text: "Animating responsive text!"
-//     }
-//   ];
-
-//   const container = {
-//     visible: {
-//       transition: {
-//         staggerChildren: 0.025
-//       }
-//     }
-//   };
-
-//   // Quick and dirt for the example
-//   const handleReplay = () => {
-//     setReplay(!replay);
-//     setTimeout(() => {
-//       setReplay(true);
-//     }, 600);
-//   };
-
-//   return (
-//     <motion.div
-//       className="App"
-//       initial="hidden"
-//       // animate="visible"
-//       animate={replay ? "visible" : "hidden"}
-//       variants={container}
-//     >
-//       <div className="container">
-//         {placeholderText.map((item, index) => {
-//           return <AnimatedText {...item} key={index} />;
-//         })}
-//       </div>
-//       <button onClick={handleReplay}>
-//         Replay <span>⟲</span>
-//       </button>
-//     </motion.div>
-//   );
-// }
-
-// .container {
-//     max-width: 960px;
-//     padding: 40px;
-//     margin: 0 auto;
-//   }
-
-//   h1 {
-//     font-size: 80px;
-//     font-weight: 700;
-//     line-height: 1;
-//     margin: 0 0 20px;
-//   }
-
-//   h2 {
-//     font-size: 50px;
-//     font-weight: 400;
-//     line-height: 1.2;
-//     opacity: 0.75;
-//     margin: 0;
-//   }
-
-//   .word-wrapper {
-//     white-space: nowrap;
-//   }
-
-//   button {
-//     appearance: none;
-//     border: none;
-//     background: transparent;
-//     outline: none;
-//     appearance: none;
-//     cursor: pointer;
-//     color: #999;
-//     text-transform: uppercase;
-//     font-weight: 600;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     margin: 0 auto;
-//   }
-
-//   button span {
-//     margin-left: 5px;
-//   }

@@ -6,22 +6,22 @@ import { useCursorContext } from "../../providers/hooks";
 
 const CardImage: React.FC<{
   image?: string;
-  // onMouseEnter?: () => void;
+  onMouseEnter?: () => void;
   onMouseLeave?: () => void;
-}> = ({ onMouseLeave, image }) => {
+}> = ({ onMouseLeave, onMouseEnter, image }) => {
   const cardRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: cardRef,
     offset: ["end end", "start start"],
   });
 
-  const { setCursorVariant, setCursorText } = useCursorContext();
+  const { onSetCursorVariant, onSetCursorText } = useCursorContext();
 
-  const onMouseEnter = () => {
-    setCursorVariant("card");
-    setCursorText("view");
-  };
-
+  // const onMouseEnter = () => {
+  //   setCursorVariant("card");
+  //   setCursorText("view");
+  // };
+  console.log("card render");
   return (
     <div
       className="card"

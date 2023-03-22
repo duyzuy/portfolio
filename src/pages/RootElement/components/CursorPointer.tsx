@@ -15,7 +15,7 @@ const CursorPointer: React.FC<PropsType> = ({
       variants={variants}
       className="circle"
       animate={cursorVariant}
-      transition={{ type: "spring", stiffness: 400, damping: 40 }}
+      transition={{ type: "spring", damping: 10, stiffness: 100 }}
     >
       <span className="cursorText">{cursorText}</span>
     </motion.div>
