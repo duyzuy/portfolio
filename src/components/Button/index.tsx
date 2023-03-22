@@ -1,35 +1,29 @@
 import React, { memo } from "react";
 import { motion } from "framer-motion";
 import "./button.scss";
-import { useCursor } from "../../pages/RootElement";
+import { useCursorContext } from "../../providers/hooks";
+import { VariantsType } from "../../models";
 type PropType = {
   text?: string;
   onClick?: () => void;
   variants?: "contained" | "outline";
   children?: JSX.Element | string;
-  onCursorEnter?: () => void;
-  onCursorLeave?: () => void;
+
+  onMouseLeave?: () => void;
 };
 const Button: React.FC<PropType> = ({
   text,
   onClick,
   variants,
   children,
-  onCursorEnter,
-  onCursorLeave,
+
+  onMouseLeave,
 }) => {
-  const { setCursorText, setCursorVariant } = useCursor();
-
+  const { setCursorVariant, setCursorText } = useCursorContext();
   const onMouseEnter = () => {
-    setCursorText("");
-    setCursorVariant("wrapper");
+    setCursorVariant(VariantsType.button);
+    setCursorText("Click");
   };
-
-  const onMouseLeave = () => {
-    setCursorText("");
-    setCursorVariant("project");
-  };
-  console.log("btn");
   return (
     <motion.button
       className="button"

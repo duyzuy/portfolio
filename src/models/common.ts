@@ -10,6 +10,14 @@ export enum StorageKEY {
 export enum VariantsType {
   hide = "hide",
   default = "default",
-  project = "project",
-  contact = "contact",
+  card = "card",
+  text = "text",
+  button = "button",
+}
+
+export interface CursorContextType {
+  cursorText: string;
+  setCursorText: (arg: string) => void;
+  cursorVariant: string;
+  setCursorVariant: (arg: string) => void;
 }

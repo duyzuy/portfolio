@@ -29,3 +29,12 @@ img {
   display: flex;
   flex-wrap: wrap;
 }
+.page-title {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    font-size: 6rem;
+  }
+}

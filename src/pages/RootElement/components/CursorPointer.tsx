@@ -3,13 +3,11 @@ import { motion } from "framer-motion";
 type PropsType = {
   variants?: { [key: string]: any };
   cursorVariant?: string;
-  spring?: any;
   cursorText?: string;
 };
-const Pointer: React.FC<PropsType> = ({
+const CursorPointer: React.FC<PropsType> = ({
   variants,
   cursorVariant,
-  spring,
   cursorText,
 }) => {
   return (
@@ -17,10 +15,10 @@ const Pointer: React.FC<PropsType> = ({
       variants={variants}
       className="circle"
       animate={cursorVariant}
-      transition={spring}
+      transition={{ type: "spring", stiffness: 400, damping: 40 }}
     >
       <span className="cursorText">{cursorText}</span>
     </motion.div>
   );
 };
-export default Pointer;
+export default CursorPointer;

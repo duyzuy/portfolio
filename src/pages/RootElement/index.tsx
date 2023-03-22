@@ -1,45 +1,31 @@
 import React, { useState, useRef, useEffect, memo } from "react";
-import { Outlet, useOutletContext } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import useMouse from "@react-hook/mouse-position";
-import Pointer from "./components/Pointer";
-import Header from "../../components/Header";
+
+import CursorPointer from "./components/CursorPointer";
+import { useCursorContext } from "../../providers/hooks";
 import "./style.scss";
-type SetCursorContextType = (arg: string) => void;
-type SetCursorVariantType = (arg: string) => void;
-
+import { VariantsType } from "../../models";
 const RootElement = () => {
-  const [cursorText, setCursorText] = useState("");
-  const [cursorVariant, setCursorVariant] = useState("default");
-  // const [mousePonsition, setMousePosition] = useState({ x: 0, y: 0 });
-  const rootRef = useRef(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const rootRef = useRef<HTMLDivElement>(null);
+  const { cursorText, cursorVariant, setCursorVariant, setCursorText } =
+    useCursorContext();
   const mouse = useMouse(rootRef, {
-    enterDelay: 0,
-    leaveDelay: 1000,
+    enterDelay: 100,
+    leaveDelay: 300,
   });
-  // useEffect(() => {
-  //   if (mouse.pageX === null || mouse.pageY === null) return;
-  //   setMousePosition({ x: mouse.pageX || 0, y: mouse.pageY || 0 });
-  // }, [mouse]);
 
-  const functiona = () => {
-    console.log("a");
-  };
-  const functionb = () => {
-    console.log("a");
-  };
-  let mouseXPosition = 0;
-  let mouseYPosition = 0;
-
-  if (mouse.x !== null) {
-    mouseXPosition = mouse.clientX || 0;
-  }
-
-  if (mouse.y !== null) {
-    mouseYPosition = mouse.clientY || 0;
-  }
-  const spring = {
-    type: "spring",
-  };
+  useEffect(() => {
+    if (mouse.clientX === null || mouse.clientY === null) {
+      return;
+    }
+    setMousePosition({
+      x: mouse.clientX,
+      y: mouse.clientY,
+    });
+  }, [mouse]);
 
   const variants = {
     hide: {
@@ -48,8 +34,8 @@ const RootElement = () => {
       width: 10,
       fontSize: "16px",
       backgroundColor: "#fff",
-      x: mouseXPosition,
-      y: mouseYPosition,
+      x: mousePosition.x - 5,
+      y: mousePosition.y - 5,
       transition: {
         type: "spring",
         mass: 0.6,
@@ -61,57 +47,73 @@ const RootElement = () => {
       width: 10,
       fontSize: "16px",
       backgroundColor: "#1e91d6",
-      x: mouseXPosition,
-      y: mouseYPosition,
+      clipPath: "circle(50% at 50% 50%)",
+      x: mousePosition.x - 5,
+      y: mousePosition.y - 5,
       transition: {
         type: "spring",
         mass: 0.6,
       },
     },
-    project: {
+    card: {
       opacity: 1,
       backgroundColor: "#fff",
       color: "#000",
       height: 80,
       width: 80,
       fontSize: "18px",
-      x: mouseXPosition - 32,
-      y: mouseYPosition - 32,
+      x: mousePosition.x - 40,
+      y: mousePosition.y - 40,
+      clipPath: "circle(50% at 50% 50%)",
       transition: {
         type: "spring",
         mass: 0.6,
       },
     },
-    contact: {
+    text: {
       opacity: 1,
       backgroundColor: "#FFBCBC",
       color: "#000",
       height: 64,
       width: 64,
       fontSize: "32px",
-      x: mouseXPosition - 48,
-      y: mouseYPosition - 48,
+      x: mousePosition.x - 32,
+      y: mousePosition.y - 32,
+    },
+    button: {
+      opacity: 1,
+      backgroundColor: "#FFBCBC",
+      color: "#000",
+      height: 64,
+      width: 64,
+      fontSize: "32px",
+      clipPath:
+        "polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%)",
+      x: mousePosition.x - 32,
+      y: mousePosition.y - 32,
     },
   };
 
   return (
-    <div className="root-app" ref={rootRef}>
-      <Pointer
+    <div
+      className="root-app"
+      ref={rootRef}
+      onMouseLeave={() => {
+        setCursorVariant(VariantsType.hide);
+        setCursorText("");
+      }}
+      onMouseEnter={() => {
+        setCursorVariant(VariantsType.default);
+        setCursorText("");
+      }}
+    >
+      <CursorPointer
         variants={variants}
         cursorText={cursorText}
         cursorVariant={cursorVariant}
-        spring={spring}
       />
-      <Outlet context={{ functiona, functionb }} />
+      <Outlet />
     </div>
   );
 };
 export default memo(RootElement);
-
-const useCursor = () => {
-  return useOutletContext<{
-    setCursorText: SetCursorContextType;
-    setCursorVariant: SetCursorVariantType;
-  }>();
-};
-export { useCursor };

@@ -10,11 +10,18 @@
   padding-right: 10px;
 }
 .header {
+  height: 80px;
   .nav-link {
     text-decoration: none;
     color: #000;
     padding: 10px 15px;
     display: inline-block;
+  }
+  .theme-action {
+    margin-left: auto;
+  }
+  .menu {
+    margin-left: auto;
   }
 }
 
