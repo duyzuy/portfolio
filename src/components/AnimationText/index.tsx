@@ -1,23 +1,20 @@
-import React from "react";
+import React, { Children } from "react";
 import { motion } from "framer-motion";
-
+import { TagType, TagMapType } from "../../models";
 // Word wrapper
 const Wrapper = (props: any) => {
   // We'll do this to prevent wrapping of words using CSS
   return <span className="word-wrapper">{props.children}</span>;
 };
 
-// Map API "type" vaules to JSX tag names
-interface TagMapType {
-  paragraph: "p";
-  heading1: "h1";
-  heading2: "h2";
-}
-
 const tagMap = {
   paragraph: "p",
   heading1: "h1",
   heading2: "h2",
+  heading3: "h3",
+  heading4: "h4",
+  heading5: "h5",
+  heading6: "h6",
 };
 
 // AnimatedCharacters
@@ -25,15 +22,13 @@ const tagMap = {
 // individual character animations
 const AnimationText: React.FC<{ text: string; type: string }> = (props) => {
   // Framer Motion variant object, for controlling animation
-  const item = {
+  const varitants = {
     hidden: {
       y: "200%",
-      color: "#0055FF",
       transition: { ease: [0.455, 0.03, 0.515, 0.955], duration: 0.85 },
     },
     visible: {
       y: 0,
-      color: "#FF0088",
       transition: { ease: [0.455, 0.03, 0.515, 0.955], duration: 0.75 },
     },
   };
@@ -59,15 +54,22 @@ const AnimationText: React.FC<{ text: string; type: string }> = (props) => {
   });
 
   // Get the tag name from tagMap
-  const Tag = tagMap[props.type as keyof TagMapType];
+  const tagName = tagMap[props.type as keyof TagMapType];
+  const Tag: React.FC<{ type: string; children: any }> = ({
+    type,
+    children,
+    ...props
+  }) => {
+    return React.createElement(type, props, children);
+  };
 
   return (
-    <h1>
+    <Tag type={tagName}>
       {words.map((word, index) => {
         return (
           // Wrap each word in the Wrapper component
           <Wrapper key={index}>
-            {words[index].flat().map((element, index) => {
+            {word.flat().map((element, index) => {
               return (
                 <span
                   style={{
@@ -78,7 +80,7 @@ const AnimationText: React.FC<{ text: string; type: string }> = (props) => {
                 >
                   <motion.span
                     style={{ display: "inline-block" }}
-                    variants={item}
+                    variants={varitants}
                   >
                     {element}
                   </motion.span>
@@ -88,8 +90,7 @@ const AnimationText: React.FC<{ text: string; type: string }> = (props) => {
           </Wrapper>
         );
       })}
-      {/* {} */}
-    </h1>
+    </Tag>
   );
 };
 

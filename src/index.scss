@@ -21,6 +21,7 @@ code {
 }
 .page-wrapper {
   min-height: 100vh;
+  background-color: #fff;
 }
 img {
   max-width: 100%;
@@ -36,5 +37,21 @@ img {
   justify-content: center;
   h1 {
     font-size: 6rem;
+    cursor: none;
   }
+  h2 {
+    font-size: 4rem;
+    cursor: none;
+  }
+  h3 {
+    font-size: 3rem;
+    cursor: none;
+  }
+}
+.hero-section {
+  height: 450px;
+  background-color: #f9f9f9;
+}
+.white {
+  color: #fff;
 }

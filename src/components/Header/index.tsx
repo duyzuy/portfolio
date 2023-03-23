@@ -1,10 +1,11 @@
-import React, { useState, memo } from "react";
+import React, { useState, memo, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Switch from "../Switch";
+import * as Icon from "react-feather";
+import { motion, useMotionValue } from "framer-motion";
 import "./header.scss";
 const Header = () => {
-  const [isOn, setIsOn] = useState(false);
-  const toggleSwitch = () => setIsOn(!isOn);
+  const [isLight, setIsLight] = useState(true);
 
   return (
     <div className="header">
@@ -12,7 +13,7 @@ const Header = () => {
         <div className="row-header">
           <div className="col-header logo">
             <Link to="/" className="nav-link">
-              <span className="text">FRD</span>
+              <img src="./images/logo-frd.svg" />
             </Link>
           </div>
           <div className="col-header menu">
@@ -40,7 +41,12 @@ const Header = () => {
             </div>
           </div>
           <div className="col-header theme-action">
-            <Switch isOn={isOn} onSwitch={toggleSwitch} />
+            <div
+              className={`switcher ${(isLight && "light") || "dark"}`}
+              onClick={() => setIsLight(!isLight)}
+            >
+              {(isLight && <Icon.Sun size={16} />) || <Icon.Moon size={16} />}
+            </div>
           </div>
         </div>
       </div>

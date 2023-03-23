@@ -1,8 +1,14 @@
-import React, { useMemo } from "react";
-const PageTitle: React.FC<{ text?: string; className?: string }> = ({
-  text,
-  className,
-}) => {
+import React, { useMemo, memo } from "react";
+import { motion } from "framer-motion";
+import AnimationText from "../AnimationText";
+import { TagType } from "../../models";
+const PageTitle: React.FC<{
+  text?: string;
+  type?: TagType;
+  className?: string;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+}> = ({ text, type = "heading1", className, onMouseEnter, onMouseLeave }) => {
   const clss = useMemo(() => {
     let cls = "page-title";
     if (className) {
@@ -10,12 +16,52 @@ const PageTitle: React.FC<{ text?: string; className?: string }> = ({
     }
     return cls;
   }, [className]);
+
+  const placeholderText = useMemo(() => {
+    let animateText = { type: "heading1", text: "" };
+
+    if (text) {
+      animateText = {
+        ...animateText,
+        text: text,
+      };
+    }
+    if (type) {
+      animateText = {
+        ...animateText,
+        type: type,
+      };
+    }
+    return animateText;
+  }, [text, type]);
+
+  const variants = {
+    visible: {
+      transition: {
+        staggerChildren: 0.05,
+      },
+    },
+  };
+
   return (
     <>
       <div className={clss}>
-        <h1>{text}</h1>
+        <motion.div
+          className="App"
+          initial="hidden"
+          animate="visible"
+          variants={variants}
+        >
+          <div
+            className="container"
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+          >
+            <AnimationText {...placeholderText} />
+          </div>
+        </motion.div>
       </div>
     </>
   );
 };
-export default PageTitle;
+export default memo(PageTitle);

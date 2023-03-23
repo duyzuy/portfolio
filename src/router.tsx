@@ -20,12 +20,23 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<RootElement />} errorElement={<ErrorPage />}>
-        <Route element={<Layout />}>
+        {/* <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-        </Route>
+        </Route> */}
+        <Route
+          path="/"
+          element={
+            <Layout>
+              <Home />
+            </Layout>
+          }
+        />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
       </Route>
       <Route path="*" element={<Notfound />} />
     </>
