@@ -61,9 +61,9 @@ export const motionVariants = (mousePosition: any) => ({
     backgroundColor: "rgb(0 0 0 / 0%)",
     border: "1px solid rgb(0 0 0 / 100%)",
     color: "#000",
-    height: 64,
-    width: 64,
-    x: mousePosition.x - 32,
-    y: mousePosition.y - 32,
+    height: 16,
+    width: 16,
+    x: mousePosition.x - 8,
+    y: mousePosition.y - 8,
   },
 });

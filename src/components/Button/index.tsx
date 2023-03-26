@@ -1,7 +1,6 @@
 import React, { memo, useEffect } from "react";
 import { motion } from "framer-motion";
 import * as Icon from "react-feather";
-import { useAnimate } from "framer-motion";
 import "./button.scss";
 
 type PropType = {
@@ -20,69 +19,84 @@ const Button: React.FC<PropType> = ({
   onMouseEnter,
   onMouseLeave,
 }) => {
-  const [scope, animate] = useAnimate();
   console.log("btn render");
 
-  const bottonVariants = {};
-  function onTap(event: any, info: any) {
-    console.log(info.point.x, info.point.y);
-  }
-
-  const textMotion = {
-    rest: {
-      color: "#000",
-      x: 0,
+  const variantsButton = {
+    start: {
+      borderColor: "transparent",
       transition: {
-        duration: 2,
+        duration: 0.2,
         type: "tween",
         ease: "easeIn",
+        delay: 0.5,
       },
     },
     hover: {
-      color: "blue",
-      x: 30,
+      borderColor: "#000",
+      transition: {
+        duration: 0.2,
+        type: "tween",
+        ease: "easeIn",
+        delay: 0.5,
+      },
+    },
+  };
+
+  const textMotion = {
+    start: {
+      letterSpacing: 0,
+      transition: {
+        duration: 0.2,
+        type: "tween",
+        ease: "easeIn",
+        delay: 0.4,
+      },
+    },
+    hover: {
+      letterSpacing: "1px",
       transition: {
         duration: 0.4,
         type: "tween",
         ease: "easeOut",
+        delay: 0.4,
       },
     },
   };
 
   const variantsArrow = {
-    rest: {
+    start: {
       opacity: 0,
       ease: "easeOut",
       duration: 0.2,
       type: "tween",
       x: "-100%",
-    },
-    hover: {
-      opacity: 1,
-      x: 0,
       transition: {
         duration: 0.2,
         type: "tween",
         ease: "easeIn",
+        delay: 0.3,
+      },
+    },
+    hover: {
+      opacity: 1,
+      x: "50%",
+      transition: {
+        duration: 0.2,
+        type: "tween",
+        ease: "easeIn",
+        delay: 0.3,
       },
     },
   };
   const variantsDot = {
-    rest: {
-      opacity: 0,
-      ease: "easeOut",
-      duration: 0.2,
-      type: "tween",
-      x: "-100%",
+    start: {
+      opacity: 0.1,
+      transition: {
+        delay: 0.6,
+      },
     },
     hover: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.2,
-        type: "tween",
-        ease: "easeIn",
-      },
+      opacity: 0,
     },
   };
 
@@ -91,10 +105,10 @@ const Button: React.FC<PropType> = ({
       className="button"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      variants={bottonVariants}
-      initial="rest"
+      initial="start"
       whileHover="hover"
-      animate="rest"
+      animate="start"
+      variants={variantsButton}
     >
       <motion.span className="dot" variants={variantsDot}></motion.span>
       <motion.span className="button__text" variants={textMotion}>

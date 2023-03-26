@@ -17,28 +17,28 @@ const Header = () => {
             </Link>
           </div>
           <div className="col-header menu">
-            <div className="menu-list">
-              <div className="menu-item">
+            <ul className="menu-list">
+              <li className="menu-item">
                 <Link to="/" className="nav-link">
                   Home
                 </Link>
-              </div>
-              <div className="menu-item">
+              </li>
+              <li className="menu-item">
                 <Link to="/about" className="nav-link">
                   About
                 </Link>
-              </div>
-              <div className="menu-item">
+              </li>
+              <li className="menu-item">
                 <Link to="/portfolio" className="nav-link">
                   Portfolio
                 </Link>
-              </div>
-              <div className="menu-item">
+              </li>
+              <li className="menu-item">
                 <Link to="/about" className="nav-link">
                   Contact
                 </Link>
-              </div>
-            </div>
+              </li>
+            </ul>
           </div>
           <div className="col-header theme-action">
             <div

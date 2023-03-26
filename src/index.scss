@@ -49,8 +49,13 @@ img {
   }
 }
 .hero-section {
-  height: 450px;
+  min-height: 90vh;
   background-color: #f9f9f9;
+  position: relative;
+  button {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 .white {
   color: #fff;

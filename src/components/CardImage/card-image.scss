@@ -4,7 +4,7 @@
   z-index: 1;
   cursor: none;
   width: 100%;
-  max-width: 450px;
+  max-width: 350px;
   margin-bottom: 60px;
   &__inner {
   }
@@ -12,8 +12,8 @@
     position: absolute;
     right: -100%;
     width: 100%;
-    top: 60%;
     padding: 20px;
+    bottom: 0;
     .description {
       line-height: 1.5;
       margin-bottom: 15px;

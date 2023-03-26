@@ -25,7 +25,7 @@ const Layout: React.FC<PropType> = ({ children }) => {
   }, []);
   const onMouseEnterButton = useCallback(() => {
     onSetCursorVariant(VariantsType.button);
-    onSetCursorText("Click");
+    onSetCursorText("");
   }, []);
 
   const onMouseEnterText = useCallback(() => {
