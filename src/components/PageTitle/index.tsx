@@ -47,18 +47,14 @@ const PageTitle: React.FC<{
     <>
       <div className={clss}>
         <motion.div
-          className="App"
+          className="text-animate"
           initial="hidden"
           animate="visible"
           variants={variants}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
         >
-          <div
-            className="container"
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-          >
-            <AnimationText {...placeholderText} />
-          </div>
+          <AnimationText {...placeholderText} />
         </motion.div>
       </div>
     </>
