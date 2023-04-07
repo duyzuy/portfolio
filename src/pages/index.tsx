@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState, useEffect } from "react";
+import React, { memo, useCallback, useState, useEffect, useRef } from "react";
 import Button from "../components/Button";
 import CardImage from "../components/CardImage";
 
@@ -7,6 +7,9 @@ import * as Icon from "react-feather";
 import { useScroll, useSpring } from "framer-motion";
 import { motion } from "framer-motion";
 import Me from "./RootElement/components/Me";
+import { useAnimate, usePresence } from "framer-motion";
+import { AnimatePresence, useAnimationFrame } from "framer-motion";
+
 const Home = (props: any) => {
   const {
     onMouseEnterButton,
@@ -29,6 +32,18 @@ const Home = (props: any) => {
     damping: 30,
     restDelta: 0.001,
   });
+  const [isPresent, safeToRemove] = usePresence();
+  const [scope, animate] = useAnimate();
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  useAnimationFrame((t) => {
+    if (!ref.current) return;
+    // const rotate = Math.sin(t / 10000) * 200;
+    // const y = (1 + Math.sin(t / 1000)) * -50;
+    // ref.current.style.transform = `translateY(${y}px) rotateX(${rotate}deg) rotateY(${rotate}deg)`;
+  });
+
   return (
     <div className="page-wrapper home">
       <div className="inner-wrapper">
@@ -39,6 +54,7 @@ const Home = (props: any) => {
                 <div className="col-hero hero-content">
                   <div className="box">
                     <h2 className="title">Hi!, I'm Ryan</h2>
+                    <PageTitle text="nguen van a" />
                     <p className="sub-title">Frontend web developer</p>
                     <p className="desc">
                       Currently located in Vietnam, I love building interactive,
@@ -64,63 +80,67 @@ const Home = (props: any) => {
             </div>
           </div>
         </div>
-        <div className="section">
-          <div className="container">
-            <div className="section-header">
-              <h2 className="title">Skills</h2>
-              <p>Familiar with some frameworks and library javascript & php</p>
-            </div>
-            <div className="section-body">
-              <div className="skill-list">
-                <div className="item">
-                  <div className="item-icon">
-                    <img src="./images/icon/ic-html.svg" />
+        <AnimatePresence>
+          <div className="section">
+            <div className="container">
+              <div className="section-header">
+                <h2 className="title">Skills</h2>
+                <p>
+                  Familiar with some frameworks and library javascript & php
+                </p>
+              </div>
+              <div className="section-body">
+                <div className="skill-list" ref={ref}>
+                  <div className="item">
+                    <div className="item-icon">
+                      <img src="./images/icon/ic-html.svg" />
+                    </div>
                   </div>
-                </div>
-                <div className="item">
-                  <div className="item-icon">
-                    <img src="./images/icon/ic-css.svg" />
+                  <div className="item">
+                    <div className="item-icon">
+                      <img src="./images/icon/ic-css.svg" />
+                    </div>
                   </div>
-                </div>
-                <div className="item">
-                  <div className="item-icon">
-                    <img src="./images/icon/ic-javascript.svg" />
+                  <div className="item">
+                    <div className="item-icon">
+                      <img src="./images/icon/ic-javascript.svg" />
+                    </div>
                   </div>
-                </div>
-                <div className="item">
-                  <div className="item-icon">
-                    <img src="./images/icon/ic-laravel.svg" />
+                  <div className="item">
+                    <div className="item-icon">
+                      <img src="./images/icon/ic-laravel.svg" />
+                    </div>
                   </div>
-                </div>
-                <div className="item">
-                  <div className="item-icon">
-                    <img src="./images/icon/ic-wordpress.svg" />
+                  <div className="item">
+                    <div className="item-icon">
+                      <img src="./images/icon/ic-wordpress.svg" />
+                    </div>
                   </div>
-                </div>
-                <div className="item">
-                  <div className="item-icon">
-                    <img src="./images/icon/ic-node.svg" />
+                  <div className="item">
+                    <div className="item-icon">
+                      <img src="./images/icon/ic-node.svg" />
+                    </div>
                   </div>
-                </div>
-                <div className="item">
-                  <div className="item-icon">
-                    <img src="./images/icon/ic-react.svg" />
+                  <div className="item">
+                    <div className="item-icon">
+                      <img src="./images/icon/ic-react.svg" />
+                    </div>
                   </div>
-                </div>
-                <div className="item">
-                  <div className="item-icon">
-                    <img src="./images/icon/ic-sass.svg" />
+                  <div className="item">
+                    <div className="item-icon">
+                      <img src="./images/icon/ic-sass.svg" />
+                    </div>
                   </div>
-                </div>
-                <div className="item">
-                  <div className="item-icon">
-                    <img src="./images/icon/ic-next.svg" />
+                  <div className="item">
+                    <div className="item-icon">
+                      <img src="./images/icon/ic-next.svg" />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </AnimatePresence>
         <div className="section">
           <div className="container">
             <div className="section-header">
