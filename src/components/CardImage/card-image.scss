@@ -3,20 +3,23 @@
   position: relative;
   z-index: 1;
   cursor: none;
-  width: 100%;
-  max-width: 350px;
   margin-bottom: 60px;
+  margin-right: 20px;
   &__inner {
+    display: flex;
+    align-items: center;
   }
   &__content {
-    position: absolute;
-    right: -100%;
-    width: 100%;
     padding: 20px;
     bottom: 0;
+    max-width: 320px;
     .description {
       line-height: 1.5;
       margin-bottom: 15px;
     }
+  }
+  img {
+    width: 100%;
+    max-width: 250px;
   }
 }

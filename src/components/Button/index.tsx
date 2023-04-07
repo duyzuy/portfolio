@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from "react";
+import React, { memo, useMemo } from "react";
 import { motion } from "framer-motion";
 import * as Icon from "react-feather";
 import "./button.scss";
@@ -10,17 +10,28 @@ type PropType = {
   children?: JSX.Element | string;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
+  className?: string;
 };
 const Button: React.FC<PropType> = ({
   text,
   onClick,
-  variants,
+  variants = "outline",
   children,
   onMouseEnter,
   onMouseLeave,
+  className,
 }) => {
-  console.log("btn render");
+  const clssName = useMemo(() => {
+    let clss = "button";
+    if (className) {
+      clss = clss.concat(" ", className);
+    }
+    if (variants) {
+      clss = clss.concat(" ", variants);
+    }
 
+    return clss;
+  }, [className, variants]);
   const variantsButton = {
     start: {
       borderColor: "transparent",
@@ -102,7 +113,7 @@ const Button: React.FC<PropType> = ({
 
   return (
     <motion.button
-      className="button"
+      className={clssName}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       initial="start"

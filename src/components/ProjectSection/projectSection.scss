@@ -1,0 +1,17 @@
+.thumbnails-container {
+  position: relative;
+  height: 100%;
+  width: max-content;
+  display: flex;
+  align-items: center;
+  padding: 0px 160px;
+  background-color: #fff;
+  border: 40px solid red;
+  .thumbnails {
+    display: flex;
+    border: 20px solid black;
+  }
+}
+.scroll-container {
+  will-change: transform;
+}

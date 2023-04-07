@@ -4,12 +4,17 @@ import CardImage from "../components/CardImage";
 
 import PageTitle from "../components/PageTitle";
 import * as Icon from "react-feather";
-import { useScroll, useSpring } from "framer-motion";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  MotionValue,
+} from "framer-motion";
 import Me from "./RootElement/components/Me";
-import { useAnimate, usePresence } from "framer-motion";
-import { AnimatePresence, useAnimationFrame } from "framer-motion";
-
+import Section from "../components/Section";
+import ProjectSection from "../components/ProjectSection";
+import { ScrollSample } from "../components/SnapscrollContainer";
 const Home = (props: any) => {
   const {
     onMouseEnterButton,
@@ -26,28 +31,11 @@ const Home = (props: any) => {
     { title: "Du an so 3", path: "./images/web-1.jpg" },
     { title: "Du an so 4", path: "./images/web-2.jpg" },
   ];
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-  const [isPresent, safeToRemove] = usePresence();
-  const [scope, animate] = useAnimate();
-
-  const ref = useRef<HTMLDivElement>(null);
-
-  useAnimationFrame((t) => {
-    if (!ref.current) return;
-    // const rotate = Math.sin(t / 10000) * 200;
-    // const y = (1 + Math.sin(t / 1000)) * -50;
-    // ref.current.style.transform = `translateY(${y}px) rotateX(${rotate}deg) rotateY(${rotate}deg)`;
-  });
 
   return (
     <div className="page-wrapper home">
       <div className="inner-wrapper">
-        <div className="section hero-section">
+        {/* <Section name="hero-section">
           <div className="container">
             <div className="inner-section">
               <div className="row-hero">
@@ -79,22 +67,18 @@ const Home = (props: any) => {
               </div>
             </div>
           </div>
-        </div>
-        <AnimatePresence>
-          <div className="section">
-            <div className="container">
-              <div className="section-header">
-                <h2 className="title">Skills</h2>
-                <p>
-                  Familiar with some frameworks and library javascript & php
-                </p>
-              </div>
-              <div className="section-body">
-                <div className="skill-list" ref={ref}>
-                  <div className="item">
-                    <div className="item-icon">
-                      <img src="./images/icon/ic-html.svg" />
-                    </div>
+        </Section>
+        <Section name="technology">
+          <div className="container">
+            <div className="section-header">
+              <h2 className="title">Skills</h2>
+              <p>Familiar with some frameworks and library javascript & php</p>
+            </div>
+            <div className="section-body">
+              <div className="skill-list">
+                <div className="item">
+                  <div className="item-icon">
+                    <img src="./images/icon/ic-html.svg" />
                   </div>
                   <div className="item">
                     <div className="item-icon">
@@ -140,8 +124,8 @@ const Home = (props: any) => {
               </div>
             </div>
           </div>
-        </AnimatePresence>
-        <div className="section">
+        </Section>
+        <Section name="project">
           <div className="container">
             <div className="section-header">
               <h2 className="title">What I do</h2>
@@ -164,7 +148,11 @@ const Home = (props: any) => {
               ))}
             </div>
           </div>
-        </div>
+        </Section> */}
+        {/* <Section name="project vertical scroll">
+          <ProjectSection data={images} />
+        </Section> */}
+        <ScrollSample />
       </div>
     </div>
   );
