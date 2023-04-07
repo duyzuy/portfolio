@@ -69,7 +69,7 @@ const Layout: React.FC<PropType> = ({ children }) => {
           }}
         />
       )}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

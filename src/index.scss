@@ -22,7 +22,7 @@ code {
   padding-right: 15px;
 }
 .page-wrapper {
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
   background-color: #fff;
 }
 img {
@@ -147,10 +147,54 @@ img {
   }
 }
 
-.section {
-  .section-header {
-    .title {
-      font-size: 2.6rem;
-    }
+// section {
+//   min-height: 100vh;
+//   padding-top: 100px;
+//   padding-bottom: 100px;
+//   display: flex;
+//   // justify-content: center;
+//   // align-items: center;
+//   position: relative;
+//   scroll-snap-align: start;
+//   perspective: 500px;
+//   overflow: hidden;
+//   > div {
+//     // width: 300px;
+//     // height: 400px;
+//     // position: relative;
+//     // max-height: 90vh;
+//     // margin: 20px;
+//     // background: var(--white);
+//     // overflow: hidden;
+//   }
+//   .section-header {
+//     .title {
+//       font-size: 2.6rem;
+//     }
+//   }
+// }
+
+.progress {
+  width: 5px;
+  height: 100%;
+  background-color: #000;
+}
+.progress-bar {
+  height: 80vh;
+  top: 10vh;
+  z-index: 999;
+  width: 50px;
+  position: fixed;
+  right: 50px;
+}
+// html {
+//   scroll-snap-type: y mandatory;
+// }
+.footer {
+  padding: 20px;
+  text-align: center;
+  background-color: #f1f1f1;
+  p {
+    margin: 0;
   }
 }

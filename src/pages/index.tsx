@@ -4,9 +4,17 @@ import CardImage from "../components/CardImage";
 
 import PageTitle from "../components/PageTitle";
 import * as Icon from "react-feather";
-import { useScroll, useSpring } from "framer-motion";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  MotionValue,
+} from "framer-motion";
 import Me from "./RootElement/components/Me";
+import Section from "../components/Section";
+import ProjectSection from "../components/ProjectSection";
+import { ScrollSample } from "../components/SnapscrollContainer";
 const Home = (props: any) => {
   const {
     onMouseEnterButton,
@@ -23,16 +31,11 @@ const Home = (props: any) => {
     { title: "Du an so 3", path: "./images/web-1.jpg" },
     { title: "Du an so 4", path: "./images/web-2.jpg" },
   ];
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
+
   return (
     <div className="page-wrapper home">
       <div className="inner-wrapper">
-        <div className="section hero-section">
+        {/* <Section name="hero-section">
           <div className="container">
             <div className="inner-section">
               <div className="row-hero">
@@ -63,8 +66,8 @@ const Home = (props: any) => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="section">
+        </Section>
+        <Section name="technology">
           <div className="container">
             <div className="section-header">
               <h2 className="title">Skills</h2>
@@ -120,8 +123,8 @@ const Home = (props: any) => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="section">
+        </Section>
+        <Section name="project">
           <div className="container">
             <div className="section-header">
               <h2 className="title">What I do</h2>
@@ -144,7 +147,11 @@ const Home = (props: any) => {
               ))}
             </div>
           </div>
-        </div>
+        </Section> */}
+        {/* <Section name="project vertical scroll">
+          <ProjectSection data={images} />
+        </Section> */}
+        <ScrollSample />
       </div>
     </div>
   );
